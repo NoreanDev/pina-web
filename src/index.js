@@ -46,7 +46,7 @@ for (const subfolder of readdirSync(`${__dirname}/commands/`)) {
     }
 }
 
-
+const session = require('express-session');
 const express = require('express');
 const path = require('path');
 
@@ -71,7 +71,6 @@ app.get('*', (req, res) => {
     res.status(404).sendFile(`${__dirname}/views/404.html`);
 });
 
-const session = require('express-session');
 const passport = require('passport');
 let { Strategy } = require('passport-discord');
 
