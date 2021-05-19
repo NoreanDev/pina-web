@@ -10,6 +10,13 @@ const client = new Discord.Client({
     cacheRoles: false,
     cacheChannels: false,
     cacheGuilds: true,
+    presence: {
+        activity: {
+            name: `${process.env.URL}`,
+            type: "WATCHING"
+        },
+        status: "idle"
+    }
 });
 
 client.commands = new Discord.Collection();
