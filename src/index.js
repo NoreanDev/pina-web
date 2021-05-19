@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'web/public')));
 // Routes
 app.use('/', routes);
 app.get('*', (req, res) => {
-    res.status(404).sendFile(`${__dirname}/views/404.html`);
+    res.status(404).sendFile(`${__dirname}/web/views/404.html`);
 });
 
 app.listen(app.get('port'), () => console.log(`Express server listen on ${app.get('port')} port`));
