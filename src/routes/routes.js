@@ -3,9 +3,14 @@ const express = require('express');
 const router = express.Router();
 const checkAuth = require(`../auth.js`);
 
-router.get('/', checkAuth, async (req, res) => {
-    const user = await req.client.users.fetch(req.user.id);
-    res.render('index.ejs', { user: req.usergi })
+router.get('/', async (req, res) => {
+    try {
+        const user = await req.client.users.fetch(req.user.id);
+        res.render('index.ejs', { user: req.user })
+    } catch (error) {
+        res.status(500).send(`Ocurrió un error: ${error}`)
+    }
+    
 });
 
 router.get('/login', checkAuth, (req, res, next) => {
