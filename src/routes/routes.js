@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     
 });
 
-router.get('/login', checkAuth, (req, res, next) => {
+router.get('/login', (req, res, next) => {
     if (req.query.error === 'access_denied') {
         return res.status(401).send('Debes iniciar sesión para acceder a más funciones de la web...<br> <span> <a href="/">Volver al inicio</a> </span>');
     } else {

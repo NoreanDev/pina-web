@@ -58,6 +58,11 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, `/views`));
 app.engine('html', require('ejs').renderFile);
 app.use(express.urlencoded({ extended: true }));
+app.use(session({ secret: 'name', resave: false, saveUninitialized: false }));
+app.use((req, res, next) => { 
+    req.client = client,
+    next();
+});
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -69,6 +74,14 @@ app.get('*', (req, res) => {
 const session = require('express-session');
 const passport = require('passport');
 let { Strategy } = require('passport-discord');
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
+});
 
 const scopes = ['identify', 'guilds'];
 
