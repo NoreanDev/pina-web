@@ -12,8 +12,15 @@ const client = new Discord.Client({
     cacheGuilds: true,
 });
 
+client.commands = new Discord.Collection();
+client.devs = [
+    "648654138929840164", // Rojito
+    "749785464923488348" // Norean
+];
+
 let { readdirSync } = require('fs');
 
+// Bot events
 for (const event of readdirSync(`${__dirname}/events/`)) {
     if (!event.endsWith('.js')) {
         return console.log(`Events (Bot) | The file ${evento.toUpperCase()} isn't JS file.`);
@@ -23,7 +30,15 @@ for (const event of readdirSync(`${__dirname}/events/`)) {
     client[fileContents.emitter](fileContents.name, fileContents.run.bind(null, client));
 }
 
-console.log(require('mongoose').models);
+// Bot commands
+for (const subfolder of readdirSync(`${__dirname}/commands/`)) {
+    for (const command of readdirSync(`${__dirname}/commands/${subfolder}/`)) {
+        let fileContents = require(`${__dirname}/commands/${subfolder}/${command}`);
+
+        client.commands.set(fileContents.name, fileContents);
+    }
+}
+
 
 const express = require('express');
 const path = require('path');
