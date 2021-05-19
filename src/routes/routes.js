@@ -1,5 +1,6 @@
 const passport = require('passport');
 const express = require('express');
+const session = require('express-session');
 const router = express.Router();
 const checkAuth = require(`../auth.js`);
 
