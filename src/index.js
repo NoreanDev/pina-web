@@ -27,19 +27,19 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const routes = require(`./web/routes/routes.js`);
+const routes = require(`./routes/routes.js`);
 
 app.set('port', 3000);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, `web/views`));
+app.set('views', path.join(__dirname, `/views`));
 app.engine('html', require('ejs').renderFile);
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'web/public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', routes);
 app.get('*', (req, res) => {
-    res.status(404).sendFile(`${__dirname}/web/views/404.html`);
+    res.status(404).sendFile(`${__dirname}/views/404.html`);
 });
 
 const session = require('express-session');
