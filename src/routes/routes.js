@@ -1,9 +1,11 @@
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
+const checkAuth = require(`../auth.js`);
 
-router.get('/', (req, res) => {
-    res.send("Hola Mundo")
+router.get('/', checkAuth, async (req, res) => {
+    const user = await req.client.users.fetch(req.user.id);
+    res.render('index.ejs', { user: req.user })
 });
 
 router.get('/login', (req, res, next) => {
