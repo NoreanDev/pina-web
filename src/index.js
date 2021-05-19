@@ -23,6 +23,8 @@ for (const event of readdirSync(`${__dirname}/events/`)) {
     client[fileContents.emitter](fileContents.name, fileContents.run.bind(null, client));
 }
 
+console.log(require('mongoose').models);
+
 const express = require('express');
 const path = require('path');
 
